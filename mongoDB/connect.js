@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const crudFunctions = require('./crud');
 require('dotenv').config();
 
 
@@ -22,6 +23,24 @@ async function main() {
         await client.connect();
 
         await listDatabases(client);
+
+        // EXAMPLE CRUD FUNCTIONS
+
+        /*
+        await crudFunctions.createListing(client, 
+        {
+            name: "Lovely Loft",
+            summary: "A charming loft in Paris",
+            bedrooms: 1,
+            bathrooms: 1
+        })
+        */
+
+        /*
+        await crudFunctions.findOneListingByName(client, "Private Room in Bushwick");
+        */
+
+        await crudFunctions.findMultipleByBedrooms(client, 2);
 
     } catch (error) {
         console.error(error);
